@@ -1,24 +1,27 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
-
+import { Stack } from "expo-router";
+/**
+ * КОРНЕВОЙ LAYOUT ПРИЛОЖЕНИЯ
+ * 
+ * Этот файл определяет основную структуру навигации всего приложения.
+ * Stack - это навигационный стек, который управляет переходами между экранами.
+ * 
+ * ЧТО ДЕЛАЕТ:
+ * - Создает навигационный стек для всего приложения
+ * - Определяет общие настройки для всех экранов
+ * - Управляет заголовками и стилями навигации
+ * 
+ * НАСТРОЙКИ (options):
+ * - headerShown: true/false - показывать/скрывать дефолтный заголовок сверху
+ * - title: "Заголовок" - текст в заголовке
+ * - headerStyle: { backgroundColor } - стиль шапки
+ * - headerTintColor: цвет текста заголовка
+ * 
+ * СТРУКТУРА URL:
+ * Файлы в папке app/ автоматически становятся маршрутами:
+ * - app/index.tsx → /
+ * - app/profile.tsx → /profile
+ * - app/user/[id].tsx → /user/123 (динамический параметр)
+ */
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
+  return <Stack screenOptions={{headerShown: false}} />;
 }
